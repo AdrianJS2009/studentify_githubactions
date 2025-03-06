@@ -13,10 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Instalar AWS CLI
+      - name: Instalar AWS CLI v2
         run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
       - name: Configurar Credenciales de AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -31,4 +32,4 @@ jobs:
           aws deploy create-deployment \
             --application-name Studentify_GithubActions \
             --deployment-group-name GrupoStudentify \
-            --s3-location bucket=NombreDelBucket,key=tu-aplicacion.zip,bundleType=zip
+            --s3-location bucket=Backend,key=tu-aplicacion.zip,bundleType=zip
