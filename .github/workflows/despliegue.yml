@@ -19,6 +19,7 @@ jobs:
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install --update
+
       - name: Configurar Credenciales de AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -26,8 +27,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
+
+      - name: Dar permisos a gradlew
+        run: chmod +x gradlew
+
       - name: Construir la aplicación
         run: ./gradlew build
+
       - name: Desplegar con CodeDeploy
         run: |
           aws deploy create-deployment \
