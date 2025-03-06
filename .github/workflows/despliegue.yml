@@ -31,9 +31,6 @@ jobs:
       - name: Dar permisos a gradlew
         run: chmod +x gradlew
 
-      - name: Buildear la app
-        run: ./gradlew build
-
       - name: Desplegar con CodeDeploy
         run: |
           aws deploy create-deployment \
