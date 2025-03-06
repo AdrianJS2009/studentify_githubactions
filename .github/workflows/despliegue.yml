@@ -36,7 +36,7 @@ jobs:
 
       - name: Desplegar con CodeDeploy
         run: |
-          aws deploy create-deployment /
-           -- application-name "Studentify_GithubActions" /
-           -- deployment-group-name "GrupoStudentify" /
-           -- github-location repository=${{github.GITHUB_REPOSITORY}},commitId=${{github.GITHUB_SHA}}
+          aws deploy create-deployment \
+            --application-name "Studentify_GithubActions" \
+            --deployment-group-name "GrupoStudentify" \
+            --github-location repository=${{ github.GITHUB_REPOSITORY }},commitId=${{ github.GITHUB_SHA }}
