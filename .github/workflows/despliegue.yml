@@ -31,12 +31,12 @@ jobs:
       - name: Dar permisos a gradlew
         run: chmod +x gradlew
 
-      - name: Construir la aplicación
+      - name: Buildear la app
         run: ./gradlew build
 
       - name: Desplegar con CodeDeploy
         run: |
-          aws deploy create-deployment \
-            --application-name Studentify_GithubActions \
-            --deployment-group-name GrupoStudentify \
-            --s3-location bucket=Backend,key=tu-aplicacion.zip,bundleType=zip
+          aws deploy create-deployment
+           -- application-name "Studentify_GithubActions"
+           -- deployment-group-name "GrupoStudentify"
+           -- github-location repository=${{github.GITHUB_REPOSITORY}},commitId=${{github.GITHUB_SHA}}
